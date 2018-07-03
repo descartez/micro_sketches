@@ -7,7 +7,7 @@ eyelid = Image("05550:"
 sensitivity = 500
 wait_period = 200
 
-def draw_pupil(prev_x, prev_y, x,y):
+def draw_pupil(x,y):
     display.set_pixel(x,y,9)
     sleep(wait_period)
 
@@ -29,7 +29,4 @@ while True:
         y = 2
 
     display.show(eyelid)
-    draw_pupil(0,0,x,y)
-    prev_x = x
-    prev_y = y
-    draw_pupil(prev_x,prev_y,x,y)
+    draw_pupil(x,y)
