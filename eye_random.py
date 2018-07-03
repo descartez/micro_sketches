@@ -1,11 +1,11 @@
 from microbit import *
 import random
 
-eyelid = Image("05550:"
-                "50005:"
+eyelid = Image("06660:"
+                "60006:"
                 "00000:"
-                "50005:"
-                "05550")
+                "60006:"
+                "06660")
 sensitivity = 500
 wait_period = 1500
 
