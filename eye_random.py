@@ -17,7 +17,6 @@ while True:
     x = random.randint(1,3)
     y = random.randint(1,3)
 
-
     display.show(eyelid)
     draw_pupil(0,0,x,y)
     prev_x = x
