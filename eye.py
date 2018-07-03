@@ -4,10 +4,15 @@ eyelid = Image("05550:"
                 "00000:"
                 "50005:"
                 "05550")
+sensitivity = 500
+wait_period = 200
 
+def draw_pupil(prev_x, prev_y, x,y):
+    display.set_pixel(x,y,9)
+    sleep(wait_period)
 
 while True:
-    acc_x = accelerometer.get_x() // 20
+    acc_x = accelerometer.get_x() // sensitivity
     if acc_x > 0:
         x = 3
     elif acc_x < 0:
@@ -15,7 +20,7 @@ while True:
     else:
         x = 2
 
-    acc_y = accelerometer.get_y() // 500
+    acc_y = accelerometer.get_y() // sensitivity
     if acc_y > 0:
         y = 3
     elif acc_y < 0:
@@ -24,8 +29,7 @@ while True:
         y = 2
 
     display.show(eyelid)
-    display.set_pixel(x,y,9)
-    sleep(500)
-    display.set_pixel(x,y,0)
-    display.set_pixel(x,y,9)
-    sleep(500)
+    draw_pupil(0,0,x,y)
+    prev_x = x
+    prev_y = y
+    draw_pupil(prev_x,prev_y,x,y)
