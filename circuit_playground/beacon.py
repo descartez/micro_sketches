@@ -27,36 +27,9 @@ buttonB.pull = digitalio.Pull.DOWN
 audiofiles = ["no-thats-not-gonna-do-it.wav"]
 
 def flash(wait):
-    pixels.fill((0, 0, 0))
+    pixels.fill((0, 255, 255))
     pixels.show()
     time.sleep(wait)
-
-def wheel(pos):
-    # Input a value 0 to 255 to get a color value.
-    # The colours are a transition r - g - b - back to r.
-    if pos < 85:
-        return (int(pos * 3), int(255 - (pos * 3)), 0)
-    elif pos < 170:
-        pos -= 85
-        return (int(255 - (pos * 3)), 0, int(pos * 3))
-    else:
-        pos -= 170
-        return (0, int(pos * 3), int(255 - pos * 3))
-
-
-def setup(wait):
-    for j in range(255):
-        for i in range(len(pixels)):
-            idx = int(i + j)
-            pixels[i] = wheel(idx & 255)
-        pixels.show()
-        time.sleep(wait)
-        if buttonA.value:
-            flash(wait)
-            play_file(audiofiles[0])
-        if buttonB.value:
-            play_file(audiofiles[0])
-
 
 def play_file(filename):
     print("Playing file: " + filename)
@@ -68,6 +41,14 @@ def play_file(filename):
                 pass
     print("Finished")
 
+def speak(wait):
+    flash(wait)
+    play_file(audiofiles[0])
+    pixels.fill((0,0,0))
+    pixels.show()
 
 while True:
-    setup(.01)
+    if buttonA.value:
+        speak(0.1)
+    if buttonB.value:
+        play_file(audiofiles[0])
